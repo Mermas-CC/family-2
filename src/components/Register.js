@@ -15,6 +15,7 @@ const Register = () => {
   const genderRef = useRef();
   const { register } = useAuth();
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -40,29 +41,113 @@ const Register = () => {
         gender
       });
 
-      navigate('/');
+      setSuccess(true);
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000); // Redirigir después de 2 segundos
     } catch (error) {
       setError('Failed to create an account: ' + error.message);
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type="email" ref={emailRef} required placeholder="Email" />
-        <input type="password" ref={passwordRef} required placeholder="Password" />
-        <input type="text" ref={nameRef} required placeholder="Name" />
-        <input type="text" ref={lastNameRef} required placeholder="Last Name" />
-        <input type="number" ref={ageRef} required placeholder="Age" />
-        <select ref={genderRef} required>
-          <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </select>
-        <button type="submit">Register</button>
-      </form>
-      {error && <p>{error}</p>}
+    <div className="font-sans">
+      <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100">
+        <div className="relative sm:max-w-sm w-full">
+          <div className="relative w-full rounded-3xl px-6 py-4 bg-gray-100 shadow-md">
+            <label htmlFor="" className="block mt-3 text-sm text-gray-700 text-center font-semibold">
+              Registro:
+            </label>
+            {success ? (
+              <div className="mt-10 text-center">
+                <p className="text-green-500">Cuenta creada exitosamente!</p>
+                <p className="text-gray-500">Redirigiendo al inicio de sesión...</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="mt-10">
+                <div>
+                  <p className="">Correo electrónico</p>
+                  <input
+                    type="email"
+                    ref={emailRef}
+                    required
+                    placeholder="Correo electrónico"
+                    className="pl-4 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                  />
+                </div>
+
+                <div className="mt-7">
+                  <p className="">Nombre</p>
+                  <input
+                    type="text"
+                    ref={nameRef}
+                    required
+                    placeholder="Nombre"
+                    className="pl-4 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                  />
+                </div>
+
+                <div className="mt-7">
+                  <p className="">Apellidos</p>
+                  <input
+                    type="text"
+                    ref={lastNameRef}
+                    required
+                    placeholder="Apellidos"
+                    className="pl-4 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                  />
+                </div>
+
+                <div className="mt-7">
+                  <p className="">Contraseña</p>
+                  <input
+                    type="password"
+                    ref={passwordRef}
+                    required
+                    placeholder="Contraseña"
+                    className="pl-4 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                  />
+                </div>
+
+                <div className="mt-7">
+                  <p className="">Edad</p>
+                  <input
+                    type="number"
+                    ref={ageRef}
+                    required
+                    placeholder="Edad"
+                    className="pl-4 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                  />
+                </div>
+
+                <div className="mt-7">
+                  <p className="">Género</p>
+                  <select
+                    ref={genderRef}
+                    required
+                    className="pl-4 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                  >
+                    <option value="">Seleccione Género</option>
+                    <option value="male">Masculino</option>
+                    <option value="female">Femenino</option>
+                    <option value="other">Otro</option>
+                  </select>
+                </div>
+
+                <div className="mt-7">
+                  <button
+                    type="submit"
+                    className="bg-violet-700 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105"
+                  >
+                    Registrarse
+                  </button>
+                </div>
+              </form>
+            )}
+            {error && <p className="mt-4 text-red-500">{error}</p>}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

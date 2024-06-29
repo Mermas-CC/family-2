@@ -25,9 +25,17 @@ export function GroupProvider({ children }) {
           setCurrentGroupName(group.name);
           const members = await getGroupMembers(group.id);
           setGroupMembers(members);
+        } else {
+          setCurrentGroup(null);
+          setCurrentGroupName('');
+          setGroupMembers([]);
         }
       };
       fetchGroup();
+    } else {
+      setCurrentGroup(null);
+      setCurrentGroupName('');
+      setGroupMembers([]);
     }
   }, [currentUser]);
 

@@ -15,24 +15,28 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h1>Welcome, {currentUser?.email}</h1>
-      {currentGroupName ? (
-        <div>
-          <p>Estás en el grupo: {currentGroupName}</p>
-          <h2>Miembros del grupo:</h2>
-          <ul>
-            {groupMembers.map((member) => (
-              <li key={member.id}>{member.name} {member.lastName}</li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <div>
-          <p>No estás en ningún grupo familiar.</p>
-          <button onClick={handleGroupNavigation}>Crear o Unirse a un Grupo</button>
-        </div>
-      )}
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-6">Welcome, {currentUser?.email}</h1>
+        {currentGroupName ? (
+          <div>
+            <p className="mb-4">Estás en el grupo: <span className="font-semibold">{currentGroupName}</span></p>
+            <h2 className="text-xl font-semibold mb-2">Miembros del grupo:</h2>
+            <ul className="list-disc list-inside">
+              {groupMembers.map((member) => (
+                <li key={member.id}>{member.name} {member.lastName}</li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <div>
+            <p className="mb-4">No estás en ningún grupo familiar.</p>
+            <button onClick={handleGroupNavigation} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+              Crear o Unirse a un Grupo
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
