@@ -9,13 +9,15 @@ import Login from './components/Login';
 import Home from './pages/Home';
 import CreateGroup from './components/CreateGroup';
 import AddMemory from './components/AddMemory';
+import AddPhoto from './components/AddPhoto';
+import PhotoDetail from './pages/PhotoDetail';
 import PrivateRoute from './components/PrivateRoute';
 import Header from './components/Header';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
+    <Router>
+      <AuthProvider>
         <GroupProvider>
           <Header />
           <Routes>
@@ -38,6 +40,30 @@ function App() {
               } 
             />
             <Route 
+              path="/add-photo" 
+              element={
+                <PrivateRoute>
+                  <AddPhoto />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/photo/:id" 
+              element={
+                <PrivateRoute>
+                  <PhotoDetail />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/home" 
+              element={
+                <PrivateRoute>
+                  <Home />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
               path="/" 
               element={
                 <PrivateRoute>
@@ -47,8 +73,8 @@ function App() {
             />
           </Routes>
         </GroupProvider>
-      </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 

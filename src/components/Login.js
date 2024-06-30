@@ -13,18 +13,19 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       setError('');
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate('/');
-    } catch (error) {
-      setError('Failed to log in: ' + error.message);
+      navigate('/home'); // Redirigir a /home después de iniciar sesión
+    } catch {
+      setError('Failed to log in');
     }
   };
 
   return (
     <div className="font-sans">
-      <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100">
+      <div className="relative min-h-screen flex flex-col sm:justify-center items-center">
         <div className="relative sm:max-w-sm w-full">
           <div className="card bg-violet-950 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6"></div>
           <div className="card bg-violet-900 shadow-lg w-full h-full rounded-3xl absolute transform rotate-6"></div>
@@ -38,7 +39,7 @@ const Login = () => {
                   type="email"
                   ref={emailRef}
                   required
-                  placeholder="Correo electronico"
+                  placeholder="Correo electrónico"
                   className="pl-4 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
                 />
               </div>
@@ -53,12 +54,7 @@ const Login = () => {
               </div>
               <div className="mt-7 flex">
                 <label htmlFor="remember_me" className="inline-flex items-center w-full cursor-pointer">
-                  <input
-                    id="remember_me"
-                    type="checkbox"
-                    className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    name="remember"
-                  />
+                  <input id="remember_me" type="checkbox" className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember" />
                   <span className="ml-2 text-sm text-gray-600">Recuerdame</span>
                 </label>
                 <div className="w-full text-right">
@@ -68,10 +64,7 @@ const Login = () => {
                 </div>
               </div>
               <div className="mt-7">
-                <button
-                  type="submit"
-                  className="bg-violet-700 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105"
-                >
+                <button type="submit" className="bg-violet-700 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105">
                   Login
                 </button>
               </div>
