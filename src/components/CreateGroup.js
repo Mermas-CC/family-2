@@ -27,32 +27,59 @@ const CreateGroup = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
       {currentGroupName ? (
-        <p>Bienvenido a {currentGroupName}</p>
+        <p className="text-2xl font-bold text-green-500 transition transform duration-500 ease-in-out">
+          Bienvenido a {currentGroupName}
+        </p>
       ) : (
-        <div>
+        <div className="w-full max-w-md">
           {isCreating ? (
-            <form onSubmit={handleCreateGroup}>
-              <input
-                type="text"
-                value={groupName}
-                onChange={(e) => setGroupName(e.target.value)}
-                required
-                placeholder="Group Name"
-              />
-              <button type="submit">Create Group</button>
+            <form onSubmit={handleCreateGroup} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="groupName">
+                  Nombre del Grupo
+                </label>
+                <input
+                  type="text"
+                  id="groupName"
+                  value={groupName}
+                  onChange={(e) => setGroupName(e.target.value)}
+                  required
+                  placeholder="Nombre del Grupo"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <button
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                  Crear Grupo
+                </button>
+              </div>
             </form>
           ) : (
             <JoinGroup />
           )}
-          <button onClick={() => setIsCreating(!isCreating)}>
+          <button
+            onClick={() => setIsCreating(!isCreating)}
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
             {isCreating ? 'Unirse a un Grupo' : 'Crear un Grupo'}
           </button>
         </div>
       )}
-      {error && <p>{error}</p>}
-      {message && <p>{message}</p>}
+      {error && (
+        <p className="text-red-500 text-xs italic mt-4">
+          {error}
+        </p>
+      )}
+      {message && (
+        <p className="text-green-500 text-xs italic mt-4 transition transform duration-500 ease-in-out">
+          {message}
+        </p>
+      )}
     </div>
   );
 };

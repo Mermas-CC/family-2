@@ -28,14 +28,16 @@ const PhotoDetail = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-transparent pt-20">
+      <div className="bg-white bg-opacity-75 p-8 rounded-lg shadow-lg w-full max-w-md">
         <img src={photo.imageUrl} alt={photo.title} className="w-full h-60 object-cover rounded-lg shadow-md" />
         <h2 className="text-2xl font-semibold mt-4">{photo.title}</h2>
         <p className="text-gray-700 mt-2">{photo.description}</p>
         <p className="text-gray-500 mt-2">Fecha: {photo.date}</p>
       </div>
+      
     </div>
+    
   );
 };
 

@@ -36,7 +36,7 @@ const AddPhoto = () => {
 
   return (
     <div className="font-sans">
-      <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100">
+      <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-transparent pt-20">
         <div className="relative sm:max-w-sm w-full">
           <div className="relative w-full rounded-3xl px-6 py-4 bg-gray-100 shadow-md">
             <label htmlFor="" className="block mt-3 text-sm text-gray-700 text-center font-semibold">

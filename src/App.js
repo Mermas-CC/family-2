@@ -1,5 +1,3 @@
-// src/App.js
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
@@ -12,17 +10,19 @@ import AddMemory from './components/AddMemory';
 import AddPhoto from './components/AddPhoto';
 import PhotoDetail from './pages/PhotoDetail';
 import PrivateRoute from './components/PrivateRoute';
-import Header from './components/Header';
+import Header from './components/Header';  // Importación de Header
+import Welcome from './pages/Welcome';
 
 function App() {
   return (
     <Router>
       <AuthProvider>
         <GroupProvider>
-          <Header />
+          <Header />  {/* Uso del componente Header */}
           <Routes>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/welcome" element={<Welcome />} />
             <Route 
               path="/create-group" 
               element={
@@ -65,11 +65,7 @@ function App() {
             />
             <Route 
               path="/" 
-              element={
-                <PrivateRoute>
-                  <Home />
-                </PrivateRoute>
-              } 
+              element={<Welcome />} 
             />
           </Routes>
         </GroupProvider>

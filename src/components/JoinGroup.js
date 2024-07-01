@@ -1,5 +1,3 @@
-// src/pages/CreateOrJoinGroup.js
-
 import React, { useRef, useState } from 'react';
 import { useGroup } from '../context/GroupContext';
 import { useNavigate } from 'react-router-dom';
@@ -21,8 +19,8 @@ const CreateOrJoinGroup = () => {
       setSuccess(true);
       setMessage(`Grupo "${groupName}" creado exitosamente!`);
       setTimeout(() => {
-        navigate('/');
-      }, 5000); // Redirigir después de 5 segundos
+        navigate('/home');
+      }, 2000); // Redirigir después de 2 segundos
     } catch (error) {
       setError('Failed to create group: ' + error.message);
     }
@@ -37,8 +35,8 @@ const CreateOrJoinGroup = () => {
       setSuccess(true);
       setMessage(`Te has unido al grupo "${groupName}" exitosamente!`);
       setTimeout(() => {
-        navigate('/');
-      }, 5000); // Redirigir después de 5 segundos
+        navigate('/home');
+      }, 2000); // Redirigir después de 2 segundos
     } catch (error) {
       setError('Failed to join group: ' + error.message);
     }
@@ -81,7 +79,7 @@ const CreateOrJoinGroup = () => {
                 <div className="mt-7">
                   <button
                     onClick={handleJoinGroup}
-                    className="bg-blue-700 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105"
+                    className="bg-violet-700 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105"
                   >
                     Unirse a Grupo
                   </button>
