@@ -3,7 +3,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
-import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
+import { 
+  onAuthStateChanged, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  sendEmailVerification, 
+  signOut 
+} from 'firebase/auth';
 
 const AuthContext = createContext();
 
@@ -14,30 +20,32 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isVerified, setIsVerified] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      setLoading(false);
       if (user) {
-        // Solo redirigir si estamos en la página de login o register
-        const currentPath = window.location.pathname;
-        if (currentPath === '/login' || currentPath === '/register') {
-          navigate('/home');
-        }
+        setCurrentUser(user);
+        setIsVerified(user.emailVerified);
+      } else {
+        setCurrentUser(null);
+        setIsVerified(false);
       }
+      setLoading(false);
     });
 
     return unsubscribe;
-  }, [navigate]);
+  }, []);
 
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const register = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const register = async (email, password) => {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    await sendEmailVerification(userCredential.user);
+    return userCredential;
   };
 
   const logout = () => {
@@ -46,6 +54,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    isVerified,
     login,
     register,
     logout,

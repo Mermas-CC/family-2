@@ -61,6 +61,7 @@ const Register = () => {
             {success ? (
               <div className="mt-10 text-center">
                 <p className="text-green-500">Cuenta creada exitosamente!</p>
+                <p className="text-gray-500">Por favor verifica tu correo electrónico.</p>
                 <p className="text-gray-500">Redirigiendo al inicio de sesión...</p>
               </div>
             ) : (

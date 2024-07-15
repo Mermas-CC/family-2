@@ -42,7 +42,6 @@ export function GroupProvider({ children }) {
   const createGroup = async (groupName) => {
     try {
       if (!currentUser) throw new Error("User is not logged in");
-      console.log(`Calling createFamilyGroup with userId ${currentUser.uid} and groupName ${groupName}`);
       const groupId = await createFamilyGroup(currentUser.uid, groupName);
       setCurrentGroup(groupId);
       setCurrentGroupName(groupName);
@@ -58,7 +57,6 @@ export function GroupProvider({ children }) {
   const joinGroup = async (groupName) => {
     try {
       if (!currentUser) throw new Error("User is not logged in");
-      console.log(`Joining group with userId ${currentUser.uid} and groupName ${groupName}`);
       const groupId = await joinFamilyGroup(currentUser.uid, groupName);
       setCurrentGroup(groupId);
       setCurrentGroupName(groupName);
@@ -88,6 +86,7 @@ export function GroupProvider({ children }) {
     currentGroup,
     currentGroupName,
     groupMembers,
+    setGroupMembers, // Asegurarse de que setGroupMembers esté en el valor del contexto
     createGroup,
     joinGroup,
     addMemoryToGroup,
