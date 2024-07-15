@@ -81,7 +81,7 @@ const Home = () => {
                 Miembros del grupo
               </button>
               {showMembers && (
-                <ul className="grid mt-2 py-2 w-full bg-white rounded-full shadow-xl max-h-40 overflow-auto z-10">
+                <ul className="grid mt-2 py-2 w-full bg-white rounded shadow-xl max-h-40 overflow-auto z-10">
                   {groupMembers.map((member) => (
                     <li key={member.id} className="px-4 py-2 hover:bg-gray-200">{member.name} {member.lastName}</li>
                   ))}
